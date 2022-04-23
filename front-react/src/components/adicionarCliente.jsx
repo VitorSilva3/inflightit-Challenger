@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Api from '../Services/Api' 
+import Api from '../Services/Api';
 
 export default function FormCliente() {
     const [user, setUser] = useState("");
@@ -15,7 +15,11 @@ export default function FormCliente() {
             name: user,
             priority: priority
         })
-        .then((res) => { alert(`Cliente registado com sucesso`); console.log(res.data) })
+        .then((res) => { 
+            alert(`Cliente registado com sucesso`); 
+            document.getElementById("name").value = ''; 
+            document.getElementById("priority").value = '';
+        })
         .catch((err) => { 
             alert("Algo correu mal!")
             console.log(err)
@@ -25,8 +29,8 @@ export default function FormCliente() {
     return (
             <div>
                 <form onSubmit={registar}>
-                    <label>Nome: <input type="text" value={user} onChange={(e) => setUser(e.target.value)} /></label>
-                    <label>Prioridade: <input type="number" value={priority} onChange={(e) => setPriority(e.target.value)} /></label>
+                    <label>Nome: <input id="name" type="text" value={user} onChange={(e) => setUser(e.target.value)} /></label>
+                    <label>Prioridade: <input id="priority" type="number" value={priority} onChange={(e) => setPriority(e.target.value)} /></label>
                     <input type="submit" /> 
                 </form>
             </div>
